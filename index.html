@@ -1,20 +1,645 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Try in git</title>
+  <meta charset="UTF-8" />
+  <title>Feliz Cumple Bby</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --main-bg: #0b1020;
+      --accent: #f5b2c4;
+      --accent-strong: #ff4f7b;
+      --text-main: #f5f5f5;
+      --muted: #9fa4b8;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--main-bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    p {
+      font-size: 0.98rem;
+    }
+
+    /* Sección 1: Portal atardecer */
+    .hero {
+      position: relative;
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.85)),
+        url("img/atardecer.jpg"); /* cambia esta ruta */
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+    }
+
+    .hero-inner {
+      padding: 4rem 1.5rem 3rem;
+    }
+
+    .hero-title {
+      font-size: 2.3rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-sub {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .hero-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent-strong);
+      color: #fff;
+      font-size: 0.98rem;
+      cursor: pointer;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .hero-button:hover {
+      transform: translateY(-2px);
+      background: #ff6b8f;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+    }
+
+    .hero-button span.icon {
+      font-size: 1.2rem;
+    }
+
+    /* Sección 2: Antes / Ahora */
+    .timeline{
+        background: radial-gradient(circle at top, #15192a 0, #070913 55%);
+        min-height: 100vh;
+        padding: 2.5rem 1.5rem;
+        display: flex;
+        align-items: center;    /* centra vertical */
+        justify-content: center;/* centra horizontal */
+    }
+
+
+    .timeline .container{
+        width: 100%;
+        max-width: 1200px;
+        min-height: calc(100vh - 5rem); /* 2.5rem arriba + 2.5rem abajo */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* mantiene centrado el bloque principal */
+    }
+
+
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @media (min-width: 700px) {
+      .timeline-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .timeline-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .timeline-header h2 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-header p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .card {
+      background: rgba(12, 16, 32, 0.9);
+      border-radius: 1.25rem;
+      padding: 1.3rem;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.55);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .card-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+    }
+
+    .photo-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.9rem;
+      background: #000;
+      aspect-ratio: 16/10;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      
+      filter: saturate(1.1);
+      object-position: center;
+    }
+
+    .img-now{
+  object-position: center 20%; /* sube el encuadre (prueba 15%–40%) */
+}
+
+    .card-caption {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* Sección 3: fullscreen picnic */
+    .picnic-scene {
+      position: relative;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    .picnic-bg {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.15)),
+        url("img/picnic.jpg"); /* pon aquí tu imagen */
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+    }
+
+    .picnic-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1.5rem;
+      color: #fdfdfd;
+      z-index: 1;
+    }
+
+    .picnic-top {
+      max-width: 420px;
+    }
+
+    .picnic-top h2 {
+      font-size: 1.7rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 10px 25px rgba(0, 0, 0, 0.8);
+    }
+
+    .picnic-top p {
+      font-size: 0.96rem;
+      color: #e5e7f0;
+      text-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .gift-click-area {
+      position: absolute;
+      right: 13%;
+      bottom: 32%;
+      width: 140px;
+      height: 70px;
+      cursor: pointer;
+      z-index: 2;
+
+    }
+
+    .gift-click-area::before{
+        content:"";
+        position:absolute;
+        inset: 0;
+        z-index: 2;
+        border-radius: 14px;
+        overflow: hidden;
+        background:rgba(255,255,255,0.20);
+        border: 1px solid rgba(255,255,255,0.35);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+        transform-origin: top center;
+        transform: perspective(700px) rotateX(0deg);
+        transition: transform 220ms ease, background 220ms ease;
+        pointer-events:none;
+    }
+
+
+    .gift-click-area:hover::before{
+        background: rgba(255,255,255,0.10);
+        transform: perspective(700px) rotateX(55deg);
+    }
+
+
+    .gift-click-area::after {
+      content: "Ábrelo";
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.82rem;
+      background: rgba(0, 0, 0, 0.55);
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      backdrop-filter: blur(4px);
+      white-space: nowrap;
+    }
+
+    /* Modal carta */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 5, 10, 0.8);
+      display: flex;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: 50;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: #fcf5f0;
+      color: #2c1b1b;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 1.2rem;
+      padding: 1.7rem 1.5rem 1.4rem;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+      position: relative;
+    }
+
+    .modal-header {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #c27b85;
+      margin-bottom: 0.3rem;
+    }
+
+    .modal-title {
+      font-size: 1.35rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .modal-body {
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .modal-body p + p {
+      margin-top: 0.8rem;
+    }
+
+    .modal-sign {
+      margin-top: 1.4rem;
+      font-size: 0.9rem;
+      text-align: right;
+      color: #a26c76;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.9rem;
+      border: none;
+      background: transparent;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #b67a83;
+    }
+
+    .modal-close:hover {
+      color: #8d4a55;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.2rem 1.5rem 2rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Overlay */
+.letter-overlay{
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(0,0,0,0.55);
+  z-index: 999;
+}
+
+.letter-overlay.open{ display: flex; }
+
+/* Carta */
+.letter{
+  width: min(720px, 92vw);
+  max-height: min(78vh, 820px);
+  overflow: auto;
+  position: relative;
+  border-radius: 14px;
+
+  /* “papel” */
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.75), rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, #fbf6ee, #f3eadc);
+  color: #2c1b1b;
+
+  border: 1px solid rgba(44,27,27,0.15);
+  box-shadow: 0 35px 90px rgba(0,0,0,0.65);
+
+  /* Animación de entrada */
+  transform: translateY(12px) scale(0.98);
+  opacity: 0;
+  transition: transform 220ms ease, opacity 220ms ease;
+}
+
+.letter-overlay.open .letter{
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* “curl” (esquina doblada) */
+.letter::after{
+  content:"";
+  position:absolute;
+  right: 0;
+  top: 0;
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(135deg, rgba(0,0,0,0.18), rgba(0,0,0,0.00) 60%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Curl con sombra más realista */
+.letter::before{
+  content:"";
+  position:absolute;
+  right: 0;
+  top: 0;
+  width: 68px;
+  height: 68px;
+  background: linear-gradient(135deg, #f7efe3 0%, #efe2d1 60%, rgba(0,0,0,0) 60%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%);
+  box-shadow: -10px 10px 18px rgba(0,0,0,0.18);
+  pointer-events: none;
+}
+
+/* Contenido */
+.letter-head{
+  padding: 1.2rem 1.3rem 0.6rem;
+  border-bottom: 1px dashed rgba(44,27,27,0.18);
+}
+
+.kicker{
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.letter-head h3{
+  margin-top: 0.35rem;
+  font-size: 1.5rem;
+}
+
+.letter-body{
+  padding: 1rem 1.3rem 1.3rem;
+  line-height: 1.7;
+  outline: none; /* para contenteditable */
+}
+
+/* Botón cerrar */
+.letter-close{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  left:auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 0;
+  cursor: pointer;
+  background: rgba(255,255,255,0.85);
+  font-size: 22px;
+  line-height: 1;
+}
+
+.to-final-btn{
+  display: inline-block;
+  padding: 0.85rem 1.4rem;
+  border-radius: 999px;
+  background: var(--accent-strong);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.45);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.to-final-btn:hover{
+  transform: translateY(-2px);
+  background: #ff6b8f;
+  box-shadow: 0 18px 45px rgba(0,0,0,0.55);
+}
+
+.timeline-cta{
+  margin-top: auto;        /* empuja el botón al fondo */
+  display: flex;
+  justify-content: flex-end; /* derecha */
+  padding-top: 1.5rem;
+}
+
+
+.timeline-cta.right{
+  justify-content: flex-end; /* lo manda a la derecha */
+}
+
+
+.photo-frame img.img-now{
+  object-position: center 25% !important;
+}
+
+
+</style>
 </head>
 <body>
-    
-    <h1>Website on github</h1>
+  <!-- Sección 1: Portal -->
+  <section class="hero" id="inicio">
+    <div class="container hero-inner">
+      <h1 class="hero-title">Feliz cumpleaños, Bby</h1>
+      <p class="hero-sub">
+        Solo quería dejarte esto por aquí. Es sencillo, pero es muy nuestro.
+      </p>
+      <button class="hero-button" onclick="scrollToSection('historia')">
+        <span>A ver tu sorpresa</span>
+        <span class="icon">↴</span>
+      </button>
+    </div>
+  </section>
 
-    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sed, eius. Deleniti, repellendus, obcaecati quam itaque consequuntur quod ex, quis autem perspiciatis hic adipisci reiciendis vero?</p>
+  <!-- Sección 2: Antes / Ahora -->
+  <section class="timeline" id="historia">
+    <div class="container">
+      <div class="timeline-header">
+        <h2>Nuestra pequeña historia</h2>
+        <p>Solo dos momentos, pero dicen bastante de cómo iniciamos y cómo vamos.</p>
+      </div>
+      <div class="timeline-grid">
+        <!-- Como iniciamos -->
+        <article class="card">
+          <div class="card-label">como iniciamos</div>
+          <div class="photo-frame">
+            <img src="img/antes.jpg" alt="Nosotros - como iniciamos" />
+          </div>
+          <p class="card-caption">
+            Aquí empezó todo. Quizás ninguno de los dos imaginaba todo lo que venía después.
+          </p>
+        </article>
 
-    <p>another paragraph. X</p>
+        <!-- Como vamos -->
+        <article class="card">
+          <div class="card-label">como vamos</div>
+          <div class="photo-frame">
+            <img class="img-now" src="img/ahora.jpg" alt="Nosotros - como vamos" />
+          </div>
+          <p class="card-caption">
+            Y ahora estamos aquí, con mil historias más y muchas que todavía nos faltan.
+          </p>
+        </article>
+      </div>
+        <div class="timeline-cta">
+            <button class="to-final-btn" type="button" onclick="goFinal()">Siguiente →</button>
+        </div>
+    </div>
+  </section>
+  <!-- Sección 3: Picnic fullscreen -->
+  <section class="picnic-scene" id="final">
+    <div class="picnic-bg"></div>
+    <div class="picnic-overlay">
+      <div class="picnic-top">
+        <h2>Feliz cumpleaños, Bby</h2>
+        <p>
+          Imagina que estás aquí, justo frente al pastel, con el mar, la brisa y este momento solo para ti.
+        </p>
+      </div>
+      <!-- área clic para el regalo -->
+      <a class="gift-click-area" href="#" onclick="openLetterOverlay(event)"></a>
+    </div>
+  </section>
 
-    <img src="https://placehold.co/200" alt="place holder image" width="200" height="200"> 
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero beatae amet nobis delectus quo dicta accusamus, a sit maiores in vel eius et laboriosam debitis repudiandae nihil impedit dolorum doloremque eveniet! Asperiores eos rerum cum!</p>
+
+
+  <footer>
+    Hecho solo para ti.
+  </footer>
+
+  <script>
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+
+    function openLetterOverlay(e){
+        if (e) e.preventDefault();
+        const o = document.getElementById("letterOverlay");
+        o.classList.add("open");
+        o.setAttribute("aria-hidden", "false");
+    }
+
+    function closeLetterOverlay(e){
+        // si viene por click en overlay, se cierra; si viene por botón también sirve
+        const o = document.getElementById("letterOverlay");
+        o.classList.remove("open");
+        o.setAttribute("aria-hidden", "true");
+    }
+
+    function goFinal(){
+        document.getElementById("final").scrollIntoView({ behavior:   "smooth", block: "start" });
+    }
+
+
+
+  </script>
+
+      <div class="letter-overlay" id="letterOverlay" aria-hidden="true" onclick="closeLetterOverlay(event)">
+      <div class="letter" onclick="event.stopPropagation()">
+        <button class="letter-close" onclick="closeLetterOverlay()">×</button>
+
+        <div class="letter-head">
+          <div class="kicker">Para Bby</div>
+          <h3>Feliz cumpleaños</h3>
+        </div>
+
+        <div class="letter-body" contenteditable="true">
+          <p>(Escribe aquí tu carta… puedes borrar este texto.)</p>
+          <p>—</p>
+          <p style="text-align:right;">Con cariño,<br>[tu nombre]</p>
+        </div>
+      </div>
+    </div>
 
 </body>
 </html>
